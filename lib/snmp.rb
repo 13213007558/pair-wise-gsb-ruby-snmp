@@ -22,4 +22,5 @@
 #
 
 require 'snmp/manager'
+require 'snmp/threshold_monitor'
 require 'snmp/version'

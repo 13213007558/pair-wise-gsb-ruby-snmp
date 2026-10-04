@@ -138,6 +138,29 @@ end
 m.join
 ```
 
+### Threshold Monitoring
+
+Feed a controlled series of counter samples to a threshold monitor without
+starting a timer or background thread. Delta samples handle Counter32 and
+Counter64 wrap-around, while a sample marked with `:discontinuity` starts a
+new baseline after a device reset.
+
+```ruby
+require 'snmp'
+
+monitor = SNMP::ThresholdMonitor.new(
+  :mode => :delta,
+  :rising_threshold => 100,
+  :falling_threshold => 0,
+  :first_sample => :none
+) do |event|
+  puts "#{event.direction} #{event.value} at #{event.time}"
+end
+
+monitor.feed(:time => 1, :value => 10, :width => 32, :discontinuity => false)
+monitor.feed(:time => 2, :value => 120, :width => 32, :discontinuity => false)
+```
+
 ## License
 
 This SNMP Library is released under the terms of the [MIT License](https://opensource.org/licenses/MIT).
