@@ -22,4 +22,5 @@
 #
 
 require 'snmp/manager'
+require 'snmp/vacm'
 require 'snmp/version'

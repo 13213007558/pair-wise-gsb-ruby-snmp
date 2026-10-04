@@ -1,5 +1,14 @@
 # Change Log
 
+## Unreleased:
+* Added SNMP::VACM, a minimal View-based Access Control Model (RFC 3415)
+  for the agent: access entries are selected by security name/model/level,
+  context, and read/write/notify operation, and OIDs are checked against
+  viewTreeFamily subtrees with masks
+* Reworked SNMP::Agent with an ordered data tree and VACM enforcement;
+  GETNEXT/GETBULK skip objects outside the requester's view instead of
+  returning and removing them
+
 ## Changes for version 1.3.2:
 * Accept non-standard error status codes
 
